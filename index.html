@@ -4,11 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <h1>สวัสดีนนท์</h1>
     <p>ยินดีต้อนรับสู่เว็บไซของเรา!</p>
     <h1>/ฝึกทำเว็บ</h1>
-    <div style="width: 100px; height: 100px; background-color: tomato;"> 1/9 เลขที่19</div>
-</html>
+    <div style="width: 100px; height: 100px; background-color: rgb(234, 71, 255);"> 1/9 เลขที่19</div>
+    <h1 id="name"></h1>
+    <button id="sayname">say my name</button>
 </body>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>พิมพ์ข้อความในเว็บ</title>
+</head>
+<body>
+
+    <h2>พิมพ์ข้อความ</h2>
+
+    <input type="text" id="myInput" placeholder="พิมพ์ที่นี่">
+    <button onclick="showText()">แสดงผล</button>
+
+    <p id="result"></p>
+
+    <script>
+        function showText() {
+            const text = document.getElementById("myInput").value;
+            document.getElementById("result").innerText = text;
+        }
+    </script>
+
+</body>
+</html>

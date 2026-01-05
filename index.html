@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>สวัสดีนนท์</h1>
+    <h1>สวัสดี</h1>
     <p>ยินดีต้อนรับสู่เว็บไซของเรา!</p>
     <h1>/ฝึกทำเว็บ</h1>
-    <div style="width: 100px; height: 100px; background-color: rgb(234, 71, 255);"> 1/9 เลขที่19</div>
     <h1 id="name"></h1>
     <button id="sayname">say my name</button>
 </body>
@@ -36,7 +35,127 @@
             const text = document.getElementById("myInput").value;
             document.getElementById("result").innerText = text;
         }
+        
     </script>
+
+< 
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เปลี่ยนสีพื้นหลัง</title>
+</head>
+<body>
+
+<button onclick="changeColor()">เปลี่ยนสีพื้นหลัง</button>
+
+<script>
+function changeColor(){
+    const colors = ["#ff6b6b", "#4dabf7", "#51cf66", "#ffd43b", "#9775fa"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    document.body.style.background = randomColor;
+}
+</script>
 
 </body>
 </html>
+
+<input type="file" accept="image/*" onchange="showImg(event)">
+<br><br>
+<img id="preview" width="300">
+
+<script>
+function showImg(event){
+    const img = document.getElementById("preview");
+    img.src = URL.createObjectURL(event.target.files[0]);
+}
+</script>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>พิมพ์ข้อความและแสดงรูป</title>
+<style>
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 6px 10px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+#previewImg {
+    display: block;
+    margin-top: 10px;
+    max-width: 300px;
+    max-height: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+
+<h3>พิมพ์ข้อความ</h3>
+<input type="text" id="textInput" placeholder="พิมพ์ที่นี่">
+<button onclick="showText()">แสดงผล</button>
+<p id="result">ลงชื่อ</p>
+
+<br>
+
+<button onclick="changeBackground()">เปลี่ยนสีพื้นหลัง</button>
+
+<br><br>
+
+<input type="file" id="fileInput" accept="image/*" onchange="showImage(event)">
+<p id="fileName"></p>
+<img id="previewImg" src="" alt="รูปจะขึ้นที่นี่">
+
+<script>
+function showText() {
+    const input = document.getElementById('textInput').value;
+    const result = document.getElementById('result');
+    if(input.trim() === ""){
+        result.textContent = "ลงชื่อ";
+    } else {
+        result.textContent = input;
+    }
+}
+
+function changeBackground() {
+    const colors = ['#a8dadc', '#ffb4a2', '#ffd6a5', '#caffbf', '#9bf6ff'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    document.body.style.backgroundColor = color;
+}
+
+function showImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('previewImg');
+    const fileNameDisplay = document.getElementById('fileName');
+
+    if(file){
+        preview.src = URL.createObjectURL(file);
+        fileNameDisplay.textContent = file.name;
+    } else {
+        preview.src = "";
+        fileNameDisplay.textContent = "";
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
+

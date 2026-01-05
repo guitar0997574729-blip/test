@@ -145,23 +145,7 @@ function showImage(event) {
     }
 }
 </script>
- document.addEventListener('keydown', function (e) {
-  // บล็อก F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-  if (
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-    (e.ctrlKey && e.key === 'U')
-  ) {
-    e.preventDefault();
-    alert('ฟีเจอร์นี้ถูกปิดใช้งาน');
-  }
-});
-
-// ปิดคลิกขวา
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-  alert('ฟีเจอร์นี้ถูกปิดใช้งาน');
-});
+ 
 
 </body>
 </html>

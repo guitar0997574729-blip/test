@@ -1,152 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="main.css">
+    <title>เว็บไซต์ของฉัน</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            margin-top: 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .admin-login-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 50;
+        }
+
+        .admin-login-btn:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .admin-login-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
 </head>
 <body>
-    <h1>สวัสดี</h1>
-    <p>ยินดีต้อนรับสู่เว็บไซของเรา!</p>
-    <h1>/ฝึกทำเว็บ</h1>
-    <h1 id="name"></h1>
-    <button id="sayname">say my name</button>
-</body>
+    <header>
+        <nav>
+            <div class="logo">✨ MyWebsite</div>
+            <ul>
+                <li><a href="#home">หน้าแรก</a></li>
+                <li><a href="#features">ฟีเจอร์</a></li>
+                <li><a href="shop.html">ร้านค้า</a></li>
+                <li><a href="#contact">ติดต่อ</a></li>
+                <li><a href="login.html">เข้าสู่ระบบ</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <title>พิมพ์ข้อความในเว็บ</title>
-</head>
-<body>
+    <main>
+        <section id="home" class="hero">
+            <h1>ยินดีต้อนรับ</h1>
+            <p>สร้างเว็บไซต์ที่สวยงามและมีประสิทธิภาพ</p>
+            <button class="btn" onclick="goToLogin()">เริ่มต้นใช้งาน</button>
+        </section>
 
-    
-    <input type="text" id="myInput" placeholder="พิมพ์ที่นี่">
-    <button onclick="showText()">แสดงผล</button>
+        <section id="features" class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">ฟีเจอร์หลัก</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🎨 ดีไซน์สวยงาม</h3>
+                    <p>เว็บไซต์ที่มีดีไซน์สมัยใหม่และตัดสินใจได้ง่าย</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 ตอบสนองได้</h3>
+                    <p>ทำงานได้ดีในทุกอุปกรณ์ เทเล็ต โทรศัพท์ และเดสก์ทอป</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ เร็ว</h3>
+                    <p>โหลดเร็วและสำรองข้อมูลด้วยประสิทธิภาพสูง</p>
+                </div>
+            </div>
+        </section>
 
-    <p id="result"></p>
+        <section id="about" class="container" style="background: #f0f4ff; margin: 3rem 0; padding: 3rem 2rem; border-radius: 8px;">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">เกี่ยวกับเราและเจ้าของเว็บไซต์</h2>
+            <div style="text-align: center; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">👤 เจ้าของเว็บไซต์</h3>
+                <p style="font-size: 1.5rem; color: #333; font-weight: bold; margin-bottom: 0.5rem;">พิเชฐ จันทร์แก้ว</p>
+                <p style="color: #666;">ผู้สร้างและผู้ดูแลเว็บไซต์นี้</p>
+            </div>
+        </section>
+
+        <section id="contact" class="container" style="background: #f5f5f5; margin: 3rem 0; padding: 3rem 2rem; border-radius: 8px; text-align: center;">
+            <h2>ติดต่อเรา</h2>
+            <p style="margin: 1rem 0; color: #666;">ติดต่อ: <strong>พิเชฐ จันทร์แก้ว</strong></p>
+            <p style="margin: 1rem 0; color: #666;">มีคำถามหรือสนใจมากขึ้น? โปรดติดต่อเรา</p>
+            <button class="btn" onclick="showMessage()">ส่งข้อความ</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MyWebsite - พิเชฐ จันทร์แก้ว</p>
+        <p>ออกแบบด้วย ❤️</p>
+    </footer>
+
+    <!-- ปุ่มเข้า Admin ลับ (ซ่อนจากลูกค้า) -->
+    <button class="admin-login-btn" onclick="checkAdminLogin()" title="Admin Login"></button>
 
     <script>
-        function showText() {
-            const text = document.getElementById("myInput").value;
-            document.getElementById("result").innerText = text;
+        function handleClick() {
+            alert('ยินดีต้อนรับ! คุณได้คลิกปุ่มเริ่มต้นใช้งาน');
         }
-        
+
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function showMessage() {
+            alert('ขอบคุณที่ติดต่อเรา! เราจะตอบกลับให้ในเร็ว ๆ นี้');
+        }
+
+        // เพิ่มผลเบลอเมื่อเลื่อนหน้า
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+            } else {
+                header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+            }
+        });
+
+        function checkAdminLogin() {
+            const isAdmin = localStorage.getItem('isAdmin');
+            const userEmail = localStorage.getItem('userEmail');
+            const AUTHORIZED_ADMIN_EMAIL = 'guitar0997574729@gmail.com';
+
+            if (isAdmin === 'true' && userEmail === AUTHORIZED_ADMIN_EMAIL) {
+                // ถ้าเป็น Admin ให้ไปหน้า Admin Dashboard
+                window.location.href = 'admin.html';
+            } else {
+                // ถ้าไม่ใช่ Admin ให้ไปหน้า Login
+                window.location.href = 'login.html';
+            }
+        }
     </script>
-
-< 
-
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<title>เปลี่ยนสีพื้นหลัง</title>
-</head>
-<body>
-
-<button onclick="changeColor()">เปลี่ยนสีพื้นหลัง</button>
-
-<script>
-function changeColor(){
-    const colors = ["#ff6b6b", "#4dabf7", "#51cf66", "#ffd43b", "#9775fa"];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    document.body.style.background = randomColor;
-}
-</script>
-
 </body>
 </html>
-
-<input type="file" accept="image/*" onchange="showImg(event)">
-<br><br>
-<img id="preview" width="300">
-
-<script>
-function showImg(event){
-    const img = document.getElementById("preview");
-    img.src = URL.createObjectURL(event.target.files[0]);
-}
-</script>
-
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<title>พิมพ์ข้อความและแสดงรูป</title>
-<style>
-body {
-    font-family: sans-serif;
-    background-color: #f0f0f0;
-    padding: 20px;
-}
-
-input[type="text"] {
-    padding: 5px;
-    font-size: 16px;
-}
-
-button {
-    padding: 6px 10px;
-    font-size: 14px;
-    margin-left: 5px;
-}
-
-#previewImg {
-    display: block;
-    margin-top: 10px;
-    max-width: 300px;
-    max-height: 200px;
-    border: 1px solid #ccc;
-}
-</style>
-</head>
-<body>
-
-
-<br>
-
-<br><br
-
-<input type="file" id="fileInput" accept="image/*" onchange="showImage(event)">
-<p id="fileName"></p>
-<img id="previewImg" src="" alt="รูปจะขึ้นที่นี่">
-
-<script>
-function showText() {
-    const input = document.getElementById('textInput').value;
-    const result = document.getElementById('result');
-    if(input.trim() === ""){
-        result.textContent = "ลงชื่อ";
-    } else {
-        result.textContent = input;
-    }
-}
-
-function changeBackground() {
-    const colors = ['#a8dadc', '#ffb4a2', '#ffd6a5', '#caffbf', '#9bf6ff'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    document.body.style.backgroundColor = color;
-}
-
-function showImage(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById('previewImg');
-    const fileNameDisplay = document.getElementById('fileName');
-
-    if(file){
-        preview.src = URL.createObjectURL(file);
-        fileNameDisplay.textContent = file.name;
-    } else {
-        preview.src = "";
-        fileNameDisplay.textContent = "";
-    }
-}
-</script>
- 
-
-</body>
-</html>
-

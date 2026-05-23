@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HHH คอมมู</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f13;--surface:#161920;--surface2:#1e2130;--border:#2a2d38;
+  --accent:#5865f2;--accent2:#eb459e;--text:#e8eaf0;--muted:#6b7080;
+  --online:#3ba55c;--yellow:#faa61a;--red:#ed4245;
+}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans Thai',sans-serif;min-height:100vh;padding:2rem 1rem 4rem;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(88,101,242,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(88,101,242,.04) 1px,transparent 1px);background-size:40px 40px;z-index:0;pointer-events:none}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.13;pointer-events:none;z-index:0;animation:float 9s ease-in-out infinite alternate}
+.blob1{width:500px;height:500px;background:var(--accent);top:-150px;left:-150px}
+.blob2{width:350px;height:350px;background:var(--accent2);bottom:-100px;right:-100px;animation-delay:-5s}
+@keyframes float{from{transform:translate(0,0) scale(1)}to{transform:translate(35px,25px) scale(1.1)}}
+
+.wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:1.4rem}
+
+.header{text-align:center;animation:sd .6s cubic-bezier(.16,1,.3,1) both}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(88,101,242,.15);border:1px solid rgba(88,101,242,.35);color:#8b9cf8;font-family:'Space Mono',monospace;font-size:.68rem;padding:4px 14px;border-radius:999px;margin-bottom:.9rem;letter-spacing:.08em;text-transform:uppercase}
+.badge::before{content:'';width:6px;height:6px;background:var(--online);border-radius:50%;box-shadow:0 0 6px var(--online);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.header h1{font-family:'Space Mono',monospace;font-size:clamp(1.9rem,5vw,2.7rem);font-weight:700;line-height:1.15;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,#8b9cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{margin-top:.5rem;color:var(--muted);font-size:.9rem;line-height:1.6}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;animation:su .6s cubic-bezier(.16,1,.3,1) .1s both}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.stat-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.stat-ico.g{background:rgba(59,165,92,.15)}.stat-ico.b{background:rgba(88,101,242,.15)}
+.stat-val{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;line-height:1}
+.stat-val.o{color:var(--online)}.stat-val.m{color:#8b9cf8}
+.stat-lbl{font-size:.72rem;color:var(--muted);margin-top:2px}
+.shimmer{background:linear-gradient(90deg,var(--border) 25%,var(--surface2) 50%,var(--border) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:4px;height:1.4rem;width:55px}
+@keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
+
+.join-wrap{animation:su .6s cubic-bezier(.16,1,.3,1) .18s both}
+.join-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:.9rem 1.5rem;background:var(--accent);color:#fff;font-family:'Noto Sans Thai',sans-serif;font-size:1rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 22px rgba(88,101,242,.35);position:relative;overflow:hidden}
+.join-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent)}
+.join-btn:hover{background:#4752c4;transform:translateY(-2px);box-shadow:0 8px 30px rgba(88,101,242,.5)}
+.join-btn svg{width:22px;height:22px}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.4rem;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.card.blue::before{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.card.yellow::before{background:linear-gradient(90deg,var(--yellow),var(--accent2))}
+.card-lbl{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.9rem}
+.news-list{display:flex;flex-direction:column;gap:.6rem}
+.news-item{display:flex;align-items:flex-start;gap:10px;padding:.65rem .85rem;background:var(--surface2);border-radius:8px;border-left:3px solid transparent}
+.news-item.c1{border-color:var(--accent)}.news-item.c2{border-color:var(--accent2)}.news-item.c3{border-color:var(--yellow)}
+.ni-title{color:#fff;display:block;font-size:.82rem;font-weight:600}
+.ni-sub{color:var(--muted);font-size:.78rem}
+
+.widget-card{animation:su .7s cubic-bezier(.16,1,.3,1) .3s both}
+iframe{display:block;border-radius:10px;width:100%;height:380px;border:none;background:transparent}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(5px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--surface);border:1px solid var(--accent);border-radius:20px;padding:1.6rem;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;transform:translateY(20px);transition:transform .25s;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.overlay.open .modal{transform:translateY(0)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.modal-head h3{font-family:'Space Mono',monospace;font-size:.8rem;color:#8b9cf8;letter-spacing:.08em;text-transform:uppercase}
+.close-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.close-btn:hover{border-color:var(--accent2);color:var(--text)}
+
+/* PASSWORD SCREEN */
+.pw-screen{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:.5rem 0 .2rem}
+.pw-icon{font-size:2.5rem;margin-bottom:.3rem}
+.pw-screen h4{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--text);letter-spacing:.05em}
+.pw-screen p{font-size:.8rem;color:var(--muted);text-align:center}
+.pw-input-wrap{position:relative;width:100%}
+.pw-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:.65rem 2.8rem .65rem .9rem;color:var(--text);font-family:'Space Mono',monospace;font-size:1.1rem;letter-spacing:.2em;outline:none;transition:border-color .2s;text-align:center}
+.pw-input:focus{border-color:var(--accent)}
+.pw-input.error{border-color:var(--red);animation:shake .3s ease}
+.pw-toggle{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:0;transition:color .2s}
+.pw-toggle:hover{color:var(--text)}
+.pw-err{font-size:.78rem;color:var(--red);min-height:1.1rem;text-align:center}
+.pw-btn{width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'Noto Sans Thai',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s}
+.pw-btn:hover{background:#4752c4;transform:translateY(-1px)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* EDITOR */
+.editor-screen{display:none}
+.editor-screen.visible{display:block}
+.editor-section{margin-bottom:1.4rem}
+.editor-section-title{font-size:.72rem;color:var(--yellow);font-family:'Space Mono',monospace;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.field-group{display:flex;flex-direction:column;gap:.8rem}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:.7rem;color:var(--muted);letter-spacing:.04em}
+.field input,.field textarea{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;color:var(--text);font-family:'Noto Sans Thai',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:55px}
+.apply-btn{display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'Noto Sans Thai',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:.4rem}
+.apply-btn:hover{background:#4752c4;transform:translateY(-1px)}
+
+/* FAB */
+.fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:50px;height:50px;background:var(--surface2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:all .2s;animation:su .6s cubic-bezier(.16,1,.3,1) .5s both}
+.fab:hover{background:var(--accent);border-color:var(--accent);transform:scale(1.1);box-shadow:0 6px 24px rgba(88,101,242,.4)}
+
+.footer{text-align:center;color:var(--muted);font-size:.75rem;line-height:1.8;animation:su .6s cubic-bezier(.16,1,.3,1) .45s both}
+.footer a{color:#8b9cf8;text-decoration:none}.footer a:hover{text-decoration:underline}
+
+@keyframes sd{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<div class="wrap">
+  <div class="header">
+    <div class="badge">Discord Server</div>
+    <h1 id="srv-name">HHH คอมมู</h1>
+    <p id="srv-desc">พูดคุย แชร์ และเชื่อมต่อกับสมาชิกใน HHH คอมมู</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-ico g">🟢</div>
+      <div>
+        <div class="stat-val o" id="onlineCount"><div class="shimmer"></div></div>
+        <div class="stat-lbl">ออนไลน์ขณะนี้</div>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-ico b">👥</div>
+      <div>
+        <div class="stat-val m" id="memberCount"><div class="shimmer"></div></div>
+        <div class="stat-lbl">สมาชิกทั้งหมด</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="join-wrap">
+    <a class="join-btn" id="join-link" href="https://discord.gg/sXqUet9P" target="_blank" rel="noopener">
+      <svg viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60.105 4.898A58.549 58.549 0 0 0 45.719.414a.22.22 0 0 0-.233.11 40.784 40.784 0 0 0-1.8 3.697c-5.456-.817-10.886-.817-16.23 0a37.384 37.384 0 0 0-1.827-3.697.229.229 0 0 0-.233-.11 58.388 58.388 0 0 0-14.387 4.484.207.207 0 0 0-.095.082C1.578 18.73-.944 32.144.293 45.39a.244.244 0 0 0 .093.167c6.073 4.46 11.955 7.167 17.729 8.962a.231.231 0 0 0 .249-.082 42.08 42.08 0 0 0 3.627-5.9.225.225 0 0 0-.123-.312 38.772 38.772 0 0 1-5.539-2.64.228.228 0 0 1-.022-.378 31.214 31.214 0 0 0 1.1-.862.22.22 0 0 1 .23-.031c11.617 5.305 24.198 5.305 35.678 0a.219.219 0 0 1 .232.028c.356.293.728.586 1.103.865a.228.228 0 0 1-.02.378 36.374 36.374 0 0 1-5.54 2.637.227.227 0 0 0-.121.315 47.249 47.249 0 0 0 3.624 5.897.225.225 0 0 0 .249.084c5.801-1.795 11.683-4.502 17.756-8.962a.228.228 0 0 0 .092-.164c1.48-15.315-2.48-28.618-10.497-40.412a.18.18 0 0 0-.093-.084ZM23.725 37.322c-3.497 0-6.38-3.211-6.38-7.156 0-3.944 2.827-7.156 6.38-7.156 3.582 0 6.437 3.24 6.38 7.156 0 3.945-2.827 7.156-6.38 7.156Zm23.593 0c-3.498 0-6.38-3.211-6.38-7.156 0-3.944 2.826-7.156 6.38-7.156 3.582 0 6.437 3.24 6.38 7.156 0 3.945-2.826 7.156-6.38 7.156Z" fill="currentColor"/></svg>
+      <span id="join-txt">เข้าร่วม HHH คอมมู เลย!</span>
+    </a>
+  </div>
+
+  <div class="card yellow" style="animation:su .6s cubic-bezier(.16,1,.3,1) .25s both">
+    <div class="card-lbl">📢 ข่าวสาร &amp; โปรโมชั่น</div>
+    <div class="news-list" id="news-list">
+      <div class="news-item c1"><span>🎉</span><div><span class="ni-title">ยินดีต้อนรับสู่ HHH คอมมู!</span><span class="ni-sub">Server สำหรับทุกคน มาพูดคุยและสนุกไปด้วยกัน</span></div></div>
+      <div class="news-item c2"><span>📌</span><div><span class="ni-title">อ่านกฎของ Server ด้วยนะ</span><span class="ni-sub">เพื่อความสนุกของทุกคนในคอมมู</span></div></div>
+      <div class="news-item c3"><span>⭐</span><div><span class="ni-title">ช่วยกัน Boost Server!</span><span class="ni-sub">Boost เพื่อปลดล็อคฟีเจอร์พรีเมียมให้ทุกคน</span></div></div>
+    </div>
+  </div>
+
+  <div class="card blue widget-card">
+    <div class="card-lbl">// Live Server Widget</div>
+    <iframe id="discord-iframe"
+      src="https://discord.com/widget?id=1507727883907629246&theme=dark"
+      allowtransparency="true"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+  </div>
+
+  <div class="footer">
+    HHH คอมมู &nbsp;·&nbsp; <a href="https://discord.gg/sXqUet9P" target="_blank">discord.gg/sXqUet9P</a> &nbsp;·&nbsp; © 2026
+  </div>
+</div>
+
+<!-- FAB -->
+<div class="fab" onclick="openEditor()" title="แก้ไขข้อมูล">⚙️</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeOnBg(event)">
+  <div class="modal">
+
+    <!-- PASSWORD SCREEN -->
+    <div class="pw-screen" id="pw-screen">
+      <div class="pw-icon">🔐</div>
+      <h4>ยืนยันตัวตน</h4>
+      <p>ใส่รหัสผ่านเพื่อเข้าสู่หน้าแก้ไข</p>
+      <div class="pw-input-wrap">
+        <input class="pw-input" id="pw-input" type="password" placeholder="••••••" maxlength="20"
+          onkeydown="if(event.key==='Enter') checkPw()"/>
+        <button class="pw-toggle" onclick="togglePwVis()" id="pw-toggle">👁️</button>
+      </div>
+      <div class="pw-err" id="pw-err"></div>
+      <button class="pw-btn" onclick="checkPw()">🔓 เข้าสู่หน้าแก้ไข</button>
+    </div>
+
+    <!-- EDITOR SCREEN -->
+    <div class="editor-screen" id="editor-screen">
+      <div class="modal-head">
+        <h3>✏️ ตั้งค่าหน้าเว็บ</h3>
+        <div class="close-btn" onclick="closeEditor()">✕</div>
+      </div>
+
+      <div class="editor-section">
+        <div class="editor-section-title">🏠 ข้อมูล Server</div>
+        <div class="field-group">
+          <div class="field"><label>ชื่อ Server</label><input id="e-name" value="HHH คอมมู"/></div>
+          <div class="field"><label>คำอธิบาย</label><textarea id="e-desc">พูดคุย แชร์ และเชื่อมต่อกับสมาชิกใน HHH คอมมู</textarea></div>
+          <div class="field"><label>Guild ID</label><input id="e-gid" value="1507727883907629246"/></div>
+        </div>
+      </div>
+
+      <div class="editor-section">
+        <div class="editor-section-title">🔗 ปุ่ม Join</div>
+        <div class="field-group">
+          <div class="field"><label>Discord Invite Link</label><input id="e-invite" value="https://discord.gg/sXqUet9P"/></div>
+          <div class="field"><label>ข้อความบนปุ่ม</label><input id="e-jointxt" value="เข้าร่วม HHH คอมมู เลย!"/></div>
+        </div>
+      </div>
+
+      <div class="editor-section">
+        <div class="editor-section-title">📢 ข่าวสาร</div>
+        <div class="field-group">
+          <div class="field"><label>ข่าว 1 — หัวข้อ</label><input id="n1t" value="ยินดีต้อนรับสู่ HHH คอมมู!"/></div>
+          <div class="field"><label>ข่าว 1 — รายละเอียด</label><input id="n1s" value="Server สำหรับทุกคน มาพูดคุยและสนุกไปด้วยกัน"/></div>
+          <div class="field"><label>ข่าว 2 — หัวข้อ</label><input id="n2t" value="อ่านกฎของ Server ด้วยนะ"/></div>
+          <div class="field"><label>ข่าว 2 — รายละเอียด</label><input id="n2s" value="เพื่อความสนุกของทุกคนในคอมมู"/></div>
+          <div class="field"><label>ข่าว 3 — หัวข้อ</label><input id="n3t" value="ช่วยกัน Boost Server!"/></div>
+          <div class="field"><label>ข่าว 3 — รายละเอียด</label><input id="n3s" value="Boost เพื่อปลดล็อคฟีเจอร์พรีเมียมให้ทุกคน"/></div>
+        </div>
+      </div>
+
+      <div class="editor-section">
+        <div class="editor-section-title">🔑 เปลี่ยนรหัสผ่าน</div>
+        <div class="field-group">
+          <div class="field"><label>รหัสผ่านใหม่ (เว้นว่างถ้าไม่เปลี่ยน)</label><input id="e-newpw" type="password" placeholder="รหัสผ่านใหม่"/></div>
+        </div>
+      </div>
+
+      <button class="apply-btn" onclick="applySettings()">✅ บันทึกและอัปเดต</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const CORRECT_PW = '369';
+let currentPw = CORRECT_PW;
+let pwVisible = false;
+
+async function fetchStats() {
+  const gid = document.getElementById('e-gid').value || '1507727883907629246';
+  try {
+    const r = await fetch(`https://discord.com/api/guilds/${gid}/widget.json`);
+    const d = await r.json();
+    document.getElementById('onlineCount').textContent =
+      d.presence_count !== undefined ? d.presence_count.toLocaleString() : '—';
+    document.getElementById('memberCount').textContent = '—';
+  } catch {
+    document.getElementById('onlineCount').textContent = '—';
+    document.getElementById('memberCount').textContent = '—';
+  }
+}
+fetchStats();
+
+function openEditor() {
+  // reset password screen
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-err').textContent = '';
+  document.getElementById('pw-input').classList.remove('error');
+  document.getElementById('pw-screen').style.display = 'flex';
+  document.getElementById('editor-screen').classList.remove('visible');
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => document.getElementById('pw-input').focus(), 300);
+}
+
+function closeEditor() {
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function closeOnBg(e) {
+  if(e.target === document.getElementById('overlay')) closeEditor();
+}
+
+function togglePwVis() {
+  pwVisible = !pwVisible;
+  const inp = document.getElementById('pw-input');
+  const tog = document.getElementById('pw-toggle');
+  inp.type = pwVisible ? 'text' : 'password';
+  tog.textContent = pwVisible ? '🙈' : '👁️';
+}
+
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  const errEl = document.getElementById('pw-err');
+  const inp = document.getElementById('pw-input');
+
+  if(val === currentPw) {
+    errEl.textContent = '';
+    inp.classList.remove('error');
+    document.getElementById('pw-screen').style.display = 'none';
+    document.getElementById('editor-screen').classList.add('visible');
+  } else {
+    errEl.textContent = '❌ รหัสผ่านไม่ถูกต้อง';
+    inp.classList.add('error');
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('error'), 500);
+  }
+}
+
+function applySettings() {
+  const name   = document.getElementById('e-name').value.trim();
+  const desc   = document.getElementById('e-desc').value.trim();
+  const gid    = document.getElementById('e-gid').value.trim();
+  const invite = document.getElementById('e-invite').value.trim();
+  const jtxt   = document.getElementById('e-jointxt').value.trim();
+  const newpw  = document.getElementById('e-newpw').value.trim();
+
+  if(name) document.getElementById('srv-name').textContent = name;
+  if(desc) document.getElementById('srv-desc').textContent = desc;
+  if(invite) document.getElementById('join-link').href = invite;
+  if(jtxt) document.getElementById('join-txt').textContent = jtxt;
+  if(newpw) { currentPw = newpw; document.getElementById('e-newpw').value = ''; }
+
+  if(gid) {
+    document.getElementById('discord-iframe').src = `https://discord.com/widget?id=${gid}&theme=dark`;
+    setTimeout(fetchStats, 1200);
+  }
+
+  const cols=['c1','c2','c3'], emojis=['🎉','📌','⭐'];
+  const list = document.getElementById('news-list');
+  list.innerHTML = '';
+  for(let i=1;i<=3;i++){
+    const t=document.getElementById(`n${i}t`).value;
+    const s=document.getElementById(`n${i}s`).value;
+    if(!t&&!s) continue;
+    list.innerHTML+=`<div class="news-item ${cols[i-1]}"><span>${emojis[i-1]}</span><div><span class="ni-title">${t}</span><span class="ni-sub">${s}</span></div></div>`;
+  }
+
+  const btn = document.querySelector('.apply-btn');
+  btn.textContent = '✅ บันทึกแล้ว!';
+  btn.style.background = 'var(--online)';
+  setTimeout(() => {
+    btn.textContent = '✅ บันทึกและอัปเดต';
+    btn.style.background = '';
+    closeEditor();
+  }, 1500);
+}
+</script>
+</body>
+</html>

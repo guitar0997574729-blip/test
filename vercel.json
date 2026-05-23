@@ -1,0 +1,11 @@
+# Vercel Configuration for Discord Widget
+
+[builds]
+# This is a static site, no build needed
+
+[routes]
+# Serve index.html for root
+/index.html
+
+# Cache strategy
+Cache-Control: public, max-age=3600
